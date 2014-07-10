@@ -30,7 +30,10 @@ public class GameWorld {
 	{
 
 		ship.update(delta);
-		enemy.update(delta);
+		if(enemy.isAlive())//if the enemy is alive keep updating
+		{
+			enemy.update(delta);
+		}
 		bullets = ship.getBullets();//get all the bullets in the arraylist
 		for(int i = 0; i < bullets.size(); i++)
 		{

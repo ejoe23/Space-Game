@@ -85,7 +85,10 @@ public class GameRenderer {
         drawBackground();
         drawFire(runTime);
         batch.draw(character, ship.getX(), ship.getY(), ship.getWidth() / 2.0f, ship.getHeight() / 2.0f,  ship.getWidth(), ship.getHeight(), 1, 1, ship.getRotation());
-        batch.draw(enemyShip,enemy.getX(),enemy.getY(),enemy.getWidth(),enemy.getHeight());
+        if(enemy.isAlive())//draw the ship only if it is alive
+        {
+        	batch.draw(enemyShip,enemy.getX(),enemy.getY(),enemy.getWidth(),enemy.getHeight());
+        }
         batch.end();
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(1, 0, 0, 0);
@@ -94,6 +97,9 @@ public class GameRenderer {
         	Bullet b = (Bullet)bullets.get(i);
         	shapeRenderer.rect(b.getX(),b.getY(),5,10);
         }
+        shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
+        shapeRenderer.circle(enemy.getBoundingCircle().x, enemy.getBoundingCircle().y, 5);
+        shapeRenderer.circle(enemy.getBoundingCircle2().x, enemy.getBoundingCircle2().y, 5);
         shapeRenderer.end();
      
     }
