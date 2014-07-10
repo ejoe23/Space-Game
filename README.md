@@ -1,1 +1,1 @@
-Test
+This is just another simple LibDGX game. It is currently not finished.
