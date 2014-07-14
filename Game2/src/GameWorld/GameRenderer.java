@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import GameObjects.Bullet;
 import GameObjects.Enemy;
+import GameObjects.EnemyBullet;
 import GameObjects.Ship;
 import GameObjects.Background;
 import Helpers.AssetLoader;
@@ -26,10 +27,12 @@ public class GameRenderer {
     private Ship ship;
     private TextureRegion character;
     private Texture space;
+    private Texture missle;
     private Texture enemyShip;
     private Background background;
     private Background secondBackground;
     private ArrayList bullets;
+    private ArrayList enemyBullets;
     private Enemy enemy;
     public GameRenderer(GameWorld world) {
         myWorld = world;
@@ -46,7 +49,7 @@ public class GameRenderer {
         character = AssetLoader.character;
         space = AssetLoader.space;
         enemyShip = AssetLoader.enemy;
-        
+        missle = AssetLoader.missle;
     }
     
     
@@ -79,6 +82,7 @@ public class GameRenderer {
     
     public void render(float runTime) {
     	bullets = ship.getBullets();
+    	enemyBullets = enemy.getEnemyBullets();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         batch.begin();
@@ -89,18 +93,28 @@ public class GameRenderer {
         {
         	batch.draw(enemyShip,enemy.getX(),enemy.getY(),enemy.getWidth(),enemy.getHeight());
         }
-        batch.end();
-        shapeRenderer.begin(ShapeType.Filled);
-        shapeRenderer.setColor(1, 0, 0, 0);
+        AssetLoader.font.draw(batch, "Shots: " + myWorld.getShots() , 10, 280);//draw score
+       
         for(int i = 0; i < bullets.size();i++)//draw bullets
         {
         	Bullet b = (Bullet)bullets.get(i);
-        	shapeRenderer.rect(b.getX(),b.getY(),5,10);
+        	batch.draw(missle,b.getX(),b.getY(),16,16);
         }
+        batch.end();
+        shapeRenderer.begin(ShapeType.Filled);
+        shapeRenderer.setColor(1,0,0,0);
+        
+        for(int i = 0; i < enemyBullets.size();i++ )
+        {
+        	EnemyBullet b = (EnemyBullet)enemyBullets.get(i);
+        	shapeRenderer.rect(b.getX(),b.getY(),5,10);
+        	
+        }
+        shapeRenderer.end();
         /*shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
         shapeRenderer.circle(enemy.getBoundingCircle().x, enemy.getBoundingCircle().y, 5);
         shapeRenderer.circle(enemy.getBoundingCircle2().x, enemy.getBoundingCircle2().y, 5);*/
-        shapeRenderer.end();
+        //shapeRenderer.end();
      
     }
 

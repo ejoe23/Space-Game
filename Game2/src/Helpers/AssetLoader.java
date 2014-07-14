@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
@@ -19,12 +20,16 @@ public class AssetLoader {
 	public static Texture space;
 	public static Sound shoot;
 	public static Texture enemy;
+	public static BitmapFont font;
+	public static Texture missle;
 	
 	
 	
 	public static void load()
 	
 	{
+		font = new BitmapFont(Gdx.files.internal("data/text.fnt"));
+		font.setScale(.25f, -.25f);
 		texture = new Texture("data/ship.png");
 		fire = new Texture("data/fire.png");
 		character = new TextureRegion(texture,0,0,128,256);
@@ -39,17 +44,19 @@ public class AssetLoader {
 		space = new Texture("data/space.jpg");
 		shoot = Gdx.audio.newSound(Gdx.files.internal("data/shoot.wav"));
 		enemy = new Texture("data/enemy.png");
-		
+		missle = new Texture("data/missle.png");
 		
 	}
 	
 	
 	public static void dispose()
 	{
+		font.dispose();
 		texture.dispose();
 		fire.dispose();
 		space.dispose();
 		enemy.dispose();
+		missle.dispose();
 	}
 
 }

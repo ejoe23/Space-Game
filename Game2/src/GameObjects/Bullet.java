@@ -27,7 +27,6 @@ public class Bullet {
 		rect.set(posistion.x,posistion.y,5,10);//create the bounding rectangle to the same size as defined in gameRenderer
 		if(posistion.y < 0)//if it moves off screen
 		{
-			System.out.println("removing");
 			visable = false;
 		}
 	}

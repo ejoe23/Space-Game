@@ -1,0 +1,49 @@
+package GameObjects;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class EnemyBullet {
+	
+ private Vector2 posistion;
+ private Vector2 velocity;
+ private float x,y;
+ private boolean visable;
+ 
+ 	public EnemyBullet(float x, float y)
+ 	{
+ 		posistion = new Vector2(x,y);
+ 		velocity = new Vector2(0,100);
+ 		visable = true;
+ 	}
+ 	
+ 	public void update(float delta)
+ 	{
+ 		
+ 		posistion.add(velocity.cpy().scl(delta));
+ 		if(posistion.y > 300 )//moves off screen
+ 		{
+ 			visable = false;
+ 		}
+ 	}
+ 	
+ 	public float getX()
+ 	{
+ 		return posistion.x;
+ 	}
+ 	
+ 	public float getY()
+ 	{
+ 		return posistion.y;
+ 	}
+ 	
+ 	public boolean getVisable()
+ 	{
+ 		return visable;
+ 	}
+	
+ 	public void setVisable(boolean v)
+ 	{
+ 		visable = v;
+ 	}
+
+}

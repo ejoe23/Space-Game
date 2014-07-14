@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import GameObjects.Background;
 import GameObjects.Bullet;
 import GameObjects.Enemy;
+import GameObjects.EnemyBullet;
 import GameObjects.Ship;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -15,7 +16,9 @@ public class GameWorld {
 	private Background background;
 	private Background secondBackground;
 	private ArrayList bullets;
+	private ArrayList enemyBullets;
 	private Enemy enemy;
+	private int shots;
 	
 	public GameWorld()
 	{
@@ -35,8 +38,20 @@ public class GameWorld {
 		{
 			enemy.update(delta);
 		}
+		//update bullts
+		updateShipBullets(delta);
+		updateEnemyBullets(delta);
+		background.update(delta);//move space
+		secondBackground.update(delta);
 		
+	}
+	
+	
+	public void updateShipBullets(float delta)
+	{
 		bullets = ship.getBullets();//get all the bullets in the arraylist
+		
+		shots = 5 - bullets.size();//set a number of shots to be shown	
 		
 		for(int i = 0; i < bullets.size(); i++)
 		{
@@ -53,13 +68,30 @@ public class GameWorld {
 			else//if its not visiable anymore remove it from the array list
 			{
 				bullets.remove(i);
+			}
+			
+		}
+	}
+	
+	public void updateEnemyBullets(float delta)
+	{
+		enemyBullets = enemy.getEnemyBullets();
+		for(int i = 0; i < enemyBullets.size();i++)
+		{
+			EnemyBullet b = (EnemyBullet) enemyBullets.get(i);
+			if(b.getVisable() == true)
+			{
+				b.update(delta);//update only if the bullet is still on the screen
+			}
+			else
+			{
+				enemyBullets.remove(i);
 				
 			}
 		}
 		
-		background.update(delta);//move space
-		secondBackground.update(delta);
 	}
+	
 	
 	public Ship getShip()
 	{
@@ -80,6 +112,11 @@ public class GameWorld {
 	public Enemy getEnemy()
 	{
 		return enemy;
+	}
+	
+	public int getShots()
+	{
+		return shots;
 	}
 	
 	
