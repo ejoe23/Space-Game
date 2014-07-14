@@ -30,17 +30,25 @@ public class GameWorld {
 	{
 
 		ship.update(delta);
+		
 		if(enemy.isAlive())//if the enemy is alive keep updating
 		{
 			enemy.update(delta);
 		}
+		
 		bullets = ship.getBullets();//get all the bullets in the arraylist
+		
 		for(int i = 0; i < bullets.size(); i++)
 		{
 			Bullet b = (Bullet) bullets.get(i);
 			if(b.getVisable() == true)
 			{
 				b.update(delta);
+				if(b.collides(enemy))
+				{
+					enemy.setAlive(false);//kill enemy
+					bullets.remove(i);//remove the bullet if it hits
+				}
 			}
 			else//if its not visiable anymore remove it from the array list
 			{
@@ -48,7 +56,8 @@ public class GameWorld {
 				
 			}
 		}
-		background.update(delta);
+		
+		background.update(delta);//move space
 		secondBackground.update(delta);
 	}
 	

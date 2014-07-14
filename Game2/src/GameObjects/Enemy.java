@@ -12,7 +12,7 @@ public class Enemy {
 	private boolean isAlive;
 	private int movingSpeed = 1;
 	private Rectangle boundingRect;
-	private Circle boundingCircle;
+	private Circle boundingCircle;//hit markers
 	private Circle boundingCircle2;
 	
 	

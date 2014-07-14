@@ -97,9 +97,9 @@ public class GameRenderer {
         	Bullet b = (Bullet)bullets.get(i);
         	shapeRenderer.rect(b.getX(),b.getY(),5,10);
         }
-        shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
+        /*shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
         shapeRenderer.circle(enemy.getBoundingCircle().x, enemy.getBoundingCircle().y, 5);
-        shapeRenderer.circle(enemy.getBoundingCircle2().x, enemy.getBoundingCircle2().y, 5);
+        shapeRenderer.circle(enemy.getBoundingCircle2().x, enemy.getBoundingCircle2().y, 5);*/
         shapeRenderer.end();
      
     }
