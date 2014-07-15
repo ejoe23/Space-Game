@@ -20,6 +20,9 @@ public class GameWorld {
 	private ArrayList enemyBullets;
 	private Enemy enemy;
 	private int shots;
+	private float timePassed;
+	private int score;
+
 	
 	public GameWorld()
 	{
@@ -27,11 +30,15 @@ public class GameWorld {
 		background = new Background(0,0,450,300,10);
 		secondBackground = new Background(0,background.getY()-300,450,300,10);//make a second background to scroll
 		enemy = new Enemy(200,50,30,30);
+		timePassed = 0;
+		score = 0;
+		
 	}
 	
 	
 	public void update(float delta)
 	{
+		
 		if(ship.getAlive())
 		{
 			ship.update(delta);
@@ -40,6 +47,15 @@ public class GameWorld {
 		if(enemy.isAlive())//if the enemy is alive keep updating
 		{
 			enemy.update(delta);
+		}
+		if(enemy.isAlive() == false)
+		{
+			timePassed +=delta;//wait 2 seconds till reset the enemy
+			if(timePassed > 2)
+			{
+				enemy.reset();
+				timePassed = 0;
+			}
 		}
 		//update bullts
 		updateShipBullets(delta);
@@ -66,6 +82,7 @@ public class GameWorld {
 				{
 					enemy.setAlive(false);//kill enemy
 					bullets.remove(i);//remove the bullet if it hits
+					score++;//add one to the score
 				}
 			}
 			else//if its not visiable anymore remove it from the array list
@@ -101,6 +118,12 @@ public class GameWorld {
 		
 	}
 	
+	public void reset()
+	{
+		score = 0;
+		ship.reset(200,235);
+	}
+	
 	
 	public Ship getShip()
 	{
@@ -126,6 +149,11 @@ public class GameWorld {
 	public int getShots()
 	{
 		return shots;
+	}
+	
+	public int getScore()
+	{
+		return score;
 	}
 	
 	

@@ -15,7 +15,7 @@ public class EnemyBullet {
  	public EnemyBullet(float x, float y)
  	{
  		posistion = new Vector2(x,y);
- 		velocity = new Vector2(0,150);
+ 		velocity = new Vector2(0,100);
  		visable = true;
  		rect = new Rectangle();
  	}
@@ -33,7 +33,8 @@ public class EnemyBullet {
  	
  	public boolean collides(Ship ship)
  	{
- 		return(Intersector.overlaps(rect, ship.getShipBoundingRectangle()));
+ 		return(Intersector.overlaps(rect, ship.getShipBoundingRectangle()) ||
+ 			   Intersector.overlaps(ship.getShipBoundingCircle(), rect));
  	}
  	
  	

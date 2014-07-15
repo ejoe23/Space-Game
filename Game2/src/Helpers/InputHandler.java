@@ -10,10 +10,12 @@ public class InputHandler implements InputProcessor {
 	public boolean holdingRight = false;//holding key
 	public boolean holdingLeft = false;
 	private Ship myShip;
+	private GameWorld myWorld;
 	
 	public InputHandler(GameWorld world)
 	{
 		myShip = world.getShip();
+		myWorld = world;
 	}
 	
 	@Override
@@ -72,7 +74,11 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		if(myShip.getAlive() == false)//reset game
+		{
+			myWorld.reset();
+			return true;
+		}
 		return false;
 	}
 

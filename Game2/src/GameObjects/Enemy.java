@@ -16,6 +16,7 @@ public class Enemy {
 	private Vector2 velocity;
 	private boolean isAlive;
 	private int movingSpeed;
+	private int ymod;
 	private Rectangle boundingRect;
 	private Circle boundingCircle;//hit markers
 	private Circle boundingCircle2;
@@ -35,14 +36,17 @@ public class Enemy {
 		boundingRect = new Rectangle();
 		boundingCircle = new Circle();
 		boundingCircle2 = new Circle();
-		shootCounter = rand.nextInt(100) + 20;
+		shootCounter = rand.nextInt(80) + 10;
 		counter = 0;
 		movingSpeed = 2;
+		ymod = 1;
+		
 	}
 	
 	public void update(float delta)
 	{
 		posistion.x += movingSpeed;
+		posistion.y += ymod;
 		boundingRect.set(posistion.x + 10,posistion.y + 20,20,20);
 		boundingCircle.set(posistion.x + 5,posistion.y + 11,5);
 		boundingCircle2.set(posistion.x + 25,posistion.y + 11,5);
@@ -52,16 +56,26 @@ public class Enemy {
 			
 		}
 		
-		if(posistion.x < 0)
+		else if(posistion.x < 0)
 		{
 			movingSpeed = rand.nextInt(3) + 1;
 			
 		}
 		
+		else if(posistion.y < 0)
+		{
+			ymod = rand.nextInt(3) + 1;
+		}
+		
+		else if(posistion.y > 100)
+		{
+			ymod = -ymod;
+		}
+		
 		if(counter == shootCounter)//the enemy should shoot random every time
 		{
 			fire();
-			shootCounter = rand.nextInt(100) + 20;
+			shootCounter = rand.nextInt(80) + 10;
 			counter = 0;
 		}
 		else
@@ -76,6 +90,13 @@ public class Enemy {
 		enemyBullets.add(b);//add bullet to array list
 		AssetLoader.enemyShoot.play();
 	} 
+	
+	public void reset()
+	{
+		posistion.x = rand.nextInt(400) + 10;
+		posistion.y = rand.nextInt(50) + 30;
+		isAlive = true;
+	}
 	
 	public int getHeight()
 	{

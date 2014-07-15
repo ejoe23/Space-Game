@@ -109,12 +109,21 @@ public class GameRenderer {
         	batch.draw(enemyShip,enemy.getX(),enemy.getY(),enemy.getWidth(),enemy.getHeight());
         }
         AssetLoader.font.draw(batch, "Shots: " + myWorld.getShots() , 10, 280);//draw score
+        AssetLoader.font.draw(batch, "Score: " + myWorld.getScore() , 370, 280);//draw score
        
         for(int i = 0; i < bullets.size();i++)//draw bullets
         {
         	Bullet b = (Bullet)bullets.get(i);
         	batch.draw(missle,b.getX(),b.getY(),16,16);
         }
+        
+        
+        if(ship.getAlive() == false)
+        {
+        	AssetLoader.font.draw(batch, "Oh man that sucks, Click to try again" , 40, 100);//draw score
+        }
+        
+        
         batch.end();
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(1,0,0,0);
@@ -125,7 +134,10 @@ public class GameRenderer {
         	shapeRenderer.rect(b.getX(),b.getY(),5,10);
         	
         }
-        //shapeRenderer.rect(ship.getShipBoundingRectangle().x,ship.getShipBoundingRectangle().y,ship.getShipBoundingRectangle().width,ship.getShipBoundingRectangle().height);
+        
+        
+       // shapeRenderer.rect(ship.getShipBoundingRectangle().x,ship.getShipBoundingRectangle().y,ship.getShipBoundingRectangle().width,ship.getShipBoundingRectangle().height);
+        //shapeRenderer.circle(ship.getShipBoundingCircle().x, ship.getShipBoundingCircle().y, ship.getShipBoundingCircle().radius);
         shapeRenderer.end();
         /*shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
         shapeRenderer.circle(enemy.getBoundingCircle().x, enemy.getBoundingCircle().y, 5);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Helpers.AssetLoader;
 
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -16,6 +17,7 @@ public class Ship {
 	public boolean isRotatingLeft = false;
 	private boolean isAlive;
 	private Rectangle shipBoundingRect;
+	private Circle boundingCircle;
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();// array of bullets the the ship will shoot
 	
 	public Ship(float x, float y,int width,int height)
@@ -26,6 +28,7 @@ public class Ship {
 		velocity = new Vector2(0,0);
 		acceleration = new Vector2(0,0);//not moving
 		shipBoundingRect = new Rectangle();
+		boundingCircle = new Circle();
 		isAlive = true;
 	}
 	
@@ -35,6 +38,7 @@ public class Ship {
 		velocity.add(acceleration.cpy().scl(delta));//get new velocity
 		posistion.add(velocity.cpy().scl(delta));//get new posistion
 		shipBoundingRect.set(posistion.x + 10,posistion.y + 2,10,30);
+		boundingCircle.set(posistion.x + 15,posistion.y + 40, 15);
 		if(velocity.x > 100)
 		{
 			velocity.x = 100;
@@ -71,6 +75,13 @@ public class Ship {
 		rotation = 0;
 		isRotatingRight = false;
 		isRotatingLeft = false;
+	}
+	
+	public void reset(float x, float y)
+	{
+		posistion.x = x;
+		posistion.y = y;
+		isAlive = true;
 	}
 	
 	public void onClickRight()
@@ -125,6 +136,11 @@ public class Ship {
 	public Rectangle getShipBoundingRectangle()
 	{
 		return shipBoundingRect;
+	}
+	
+	public Circle getShipBoundingCircle()
+	{
+		return boundingCircle;
 	}
 	
 	
