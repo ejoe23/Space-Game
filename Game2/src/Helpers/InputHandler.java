@@ -33,7 +33,10 @@ public class InputHandler implements InputProcessor {
 		
 		else if(keycode == 62)//space bar is shoot
 		{
-			myShip.shoot();
+			if(myShip.getAlive())//only shoot if alive
+			{
+				myShip.shoot();
+			}
 			return true;
 		}
 		else

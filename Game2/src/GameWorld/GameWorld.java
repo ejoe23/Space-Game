@@ -7,6 +7,7 @@ import GameObjects.Bullet;
 import GameObjects.Enemy;
 import GameObjects.EnemyBullet;
 import GameObjects.Ship;
+import Helpers.AssetLoader;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -31,8 +32,10 @@ public class GameWorld {
 	
 	public void update(float delta)
 	{
-
-		ship.update(delta);
+		if(ship.getAlive())
+		{
+			ship.update(delta);
+		}
 		
 		if(enemy.isAlive())//if the enemy is alive keep updating
 		{
@@ -51,7 +54,7 @@ public class GameWorld {
 	{
 		bullets = ship.getBullets();//get all the bullets in the arraylist
 		
-		shots = 5 - bullets.size();//set a number of shots to be shown	
+		shots = 3 - bullets.size();//set a number of shots to be shown	
 		
 		for(int i = 0; i < bullets.size(); i++)
 		{
@@ -82,6 +85,12 @@ public class GameWorld {
 			if(b.getVisable() == true)
 			{
 				b.update(delta);//update only if the bullet is still on the screen
+				if(b.collides(ship))
+				{
+					ship.setAlive(false);
+					enemyBullets.remove(i);
+					AssetLoader.explosionSound.play();//play explosion
+				}
 			}
 			else
 			{

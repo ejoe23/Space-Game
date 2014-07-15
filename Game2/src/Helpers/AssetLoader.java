@@ -17,11 +17,16 @@ public class AssetLoader {
 	public static TextureRegion fire4;
 	public static Texture fire;
 	public static Animation Flames;
+	public static Animation shipDie;
 	public static Texture space;
 	public static Sound shoot;
+	public static Sound enemyShoot;
+	public static Sound explosionSound;
 	public static Texture enemy;
 	public static BitmapFont font;
 	public static Texture missle;
+	public static Texture explosion;
+	public static TextureRegion explosion1,explosion2,explosion3,explosion4,explosion5;
 	
 	
 	
@@ -43,8 +48,25 @@ public class AssetLoader {
 		Flames.setPlayMode(Animation.LOOP_PINGPONG);
 		space = new Texture("data/space.jpg");
 		shoot = Gdx.audio.newSound(Gdx.files.internal("data/shoot.wav"));
+		explosionSound = Gdx.audio.newSound(Gdx.files.internal("data/explosionsound.wav"));
+		enemyShoot = Gdx.audio.newSound(Gdx.files.internal("data/enemyShoot.wav"));
 		enemy = new Texture("data/enemy.png");
 		missle = new Texture("data/missle.png");
+		//explosion
+		explosion = new Texture("data/GrenadeExplosion.png");
+		explosion1 = new TextureRegion(explosion,2,28,47,75);
+		explosion1.flip(false, true);
+		explosion2 = new TextureRegion(explosion,49,4,51,98);
+		explosion2.flip(false, true);
+		explosion3 = new TextureRegion(explosion,101,3,51,98);
+		explosion3.flip(false, true);
+		explosion4 = new TextureRegion(explosion,151,7,49,94);
+		explosion4.flip(false, true);
+		explosion5 = new TextureRegion(explosion,201,1,50,104);
+		explosion5.flip(false, true);
+		TextureRegion[] explosions = {explosion1,explosion2,explosion3,explosion3,explosion4,explosion5};
+		shipDie = new Animation(0.06f,explosions);
+		shipDie.setPlayMode(Animation.LOOP_PINGPONG);
 		
 	}
 	
@@ -57,6 +79,7 @@ public class AssetLoader {
 		space.dispose();
 		enemy.dispose();
 		missle.dispose();
+		explosion.dispose();
 	}
 
 }

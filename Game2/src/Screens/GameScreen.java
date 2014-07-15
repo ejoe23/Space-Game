@@ -32,16 +32,18 @@ public class GameScreen implements Screen {
 	{
 		ship.resetRotation(); 
 		runTime += delta;
-		if(handler.holdingRight)//if the keys are being held run the methods. Run this here because the hander is here
+		if(ship.getAlive())//only handle rotation if the ship is alive
 		{
-			ship.onClickRight();
-		}
+			if(handler.holdingRight)//if the keys are being held run the methods. Run this here because the hander is here
+			{
+				ship.onClickRight();
+			}
 		
-		else if(handler.holdingLeft)
-		{
-			ship.onClickLeft();
+			else if(handler.holdingLeft)
+			{
+				ship.onClickLeft();
+			}
 		}
-		
 		world.update(delta);//update everything
 		renderer.render(runTime);//draw everything
 		

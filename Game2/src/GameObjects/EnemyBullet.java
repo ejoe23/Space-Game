@@ -1,5 +1,7 @@
 package GameObjects;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class EnemyBullet {
@@ -8,12 +10,14 @@ public class EnemyBullet {
  private Vector2 velocity;
  private float x,y;
  private boolean visable;
+ private Rectangle rect;
  
  	public EnemyBullet(float x, float y)
  	{
  		posistion = new Vector2(x,y);
- 		velocity = new Vector2(0,100);
+ 		velocity = new Vector2(0,150);
  		visable = true;
+ 		rect = new Rectangle();
  	}
  	
  	public void update(float delta)
@@ -24,7 +28,14 @@ public class EnemyBullet {
  		{
  			visable = false;
  		}
+ 		rect.set(posistion.x,posistion.y,5,10);
  	}
+ 	
+ 	public boolean collides(Ship ship)
+ 	{
+ 		return(Intersector.overlaps(rect, ship.getShipBoundingRectangle()));
+ 	}
+ 	
  	
  	public float getX()
  	{

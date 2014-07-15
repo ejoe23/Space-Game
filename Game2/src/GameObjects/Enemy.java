@@ -3,6 +3,8 @@ package GameObjects;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Helpers.AssetLoader;
+
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -56,7 +58,7 @@ public class Enemy {
 			
 		}
 		
-		if(counter == shootCounter)//the enemy should shoot
+		if(counter == shootCounter)//the enemy should shoot random every time
 		{
 			fire();
 			shootCounter = rand.nextInt(100) + 20;
@@ -68,10 +70,11 @@ public class Enemy {
 		}
 	}
 	
-	public void fire()
+	public void fire()//add bullet to the array list
 	{
 		EnemyBullet b = new EnemyBullet(posistion.x + 10,posistion.y);
 		enemyBullets.add(b);//add bullet to array list
+		AssetLoader.enemyShoot.play();
 	} 
 	
 	public int getHeight()
