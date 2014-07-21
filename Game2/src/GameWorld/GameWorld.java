@@ -22,6 +22,7 @@ public class GameWorld {
 	private int shots;
 	private float timePassed;
 	private int score;
+	private float timeLastScored;//if this time is too low dont add score 2 bullets can hit the same guy
 
 	
 	public GameWorld()
@@ -74,15 +75,20 @@ public class GameWorld {
 		
 		for(int i = 0; i < bullets.size(); i++)
 		{
-			Bullet b = (Bullet) bullets.get(i);
+			Bullet b = (Bullet) bullets.get(i);//draw the bullet object out of the arraylist
 			if(b.getVisable() == true)
 			{
+				timeLastScored += delta;
 				b.update(delta);
 				if(b.collides(enemy))
 				{
 					enemy.setAlive(false);//kill enemy
 					bullets.remove(i);//remove the bullet if it hits
-					score++;//add one to the score
+					if(timeLastScored > 1)//only if there is a 1 second delay between hits
+					{
+						score++;//add one to the score
+						timeLastScored = 0;
+					}
 				}
 			}
 			else//if its not visiable anymore remove it from the array list

@@ -120,7 +120,7 @@ public class GameRenderer {
         
         if(ship.getAlive() == false)
         {
-        	AssetLoader.font.draw(batch, "Oh man that sucks, Click to try again" , 40, 100);//draw score
+        	AssetLoader.font.draw(batch, "Click to try again" , 40, 100);//draw score
         }
         
         
@@ -138,12 +138,12 @@ public class GameRenderer {
         
        // shapeRenderer.rect(ship.getShipBoundingRectangle().x,ship.getShipBoundingRectangle().y,ship.getShipBoundingRectangle().width,ship.getShipBoundingRectangle().height);
         //shapeRenderer.circle(ship.getShipBoundingCircle().x, ship.getShipBoundingCircle().y, ship.getShipBoundingCircle().radius);
-        shapeRenderer.end();
+    
         /*shapeRenderer.rect(enemy.getBoundingRect().x,enemy.getBoundingRect().y,10,10);
         shapeRenderer.circle(enemy.getBoundingCircle().x, enemy.getBoundingCircle().y, 5);
         shapeRenderer.circle(enemy.getBoundingCircle2().x, enemy.getBoundingCircle2().y, 5);*/
-        //shapeRenderer.end();
-     
+
+        shapeRenderer.end();
     }
 
 }

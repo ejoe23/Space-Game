@@ -33,7 +33,7 @@ public class AssetLoader {
 	public static void load()
 	
 	{
-		font = new BitmapFont(Gdx.files.internal("data/text.fnt"));
+		font = new BitmapFont(Gdx.files.internal("text.fnt"));
 		font.setScale(.25f, -.25f);
 		texture = new Texture("data/ship.png");
 		fire = new Texture("data/fire.png");
